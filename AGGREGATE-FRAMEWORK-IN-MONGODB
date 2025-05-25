@@ -101,3 +101,32 @@ car_dealership>  db.cars.aggregate([
     ]
   }
 ]
+car_dealership>  db.cars.aggregate([
+... {$match:{
+... maker:"Hyundai"}},
+... {$count:"Total_cars"}
+... ])
+[ { Total_cars: 4 } ]
+car_dealership>
+
+car_dealership> db.cars.aggregate([
+... {$match:{
+... maker:"Hyundai"}},
+... {$group:{_id:"$fuel_type",Totalcars:{$sum:1}}}
+... ])
+[
+  { _id: 'Electric', Totalcars: 1 },
+  { _id: 'Diesel', Totalcars: 1 },
+  { _id: 'Petrol', Totalcars: 2 }
+]
+car_dealership> db.cars.aggregate([
+... {$match:{maker:"Hyundai"}},
+... {$project:
+... {maker:1,model:1,fuel_type:1,_id:0}}
+... ])
+[
+  { maker: 'Hyundai', model: 'Creta', fuel_type: 'Diesel' },
+  { maker: 'Hyundai', model: 'Venue', fuel_type: 'Petrol' },
+  { maker: 'Hyundai', model: 'i20', fuel_type: 'Petrol' },
+  { maker: 'Hyundai', model: 'Kona Electric', fuel_type: 'Electric' }
+]
