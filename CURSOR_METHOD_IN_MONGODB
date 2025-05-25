@@ -1,0 +1,83 @@
+car_dealership> db.cars.find({fuel_type:"Petrol"}).count()
+1
+car_dealership> db.cars.find({},{_id:0,model:1}).sort({model:1})
+[
+  { model: 'Creta' },
+  { model: 'Nexon' },
+  { model: 'Venue' },
+  { model: 'XUV500' }
+]
+car_dealership> db.cars.find({},{_id:0,model:1,maker:1}).sort({model:1})
+[
+  { maker: 'Hyundai', model: 'Creta' },
+  { maker: 'Tata', model: 'Nexon' },
+  { model: 'Venue' },
+  { maker: 'Mahindra', model: 'XUV500' }
+]
+car_dealership> db.cars.find().limit(2)
+[
+  {
+    _id: ObjectId('68330d5855c924ce206c4bd1'),
+    maker: 'Hyundai',
+    model: 'Creta',
+    fuel_type: 'Diesel',
+    transmission: 'Manual',
+    engine: { type: 'Naturally Aspirated', cc: 1493, torque: '270 nm' },
+    features: [
+      'Sunroof',
+      'Leather Seats',
+      'Wireless Charging',
+      'Ventilated Seats',
+      'Bluetooth'
+    ],
+    sunroof: true,
+    airbags: 6,
+    alloys: 'yes',
+    color: 'Blue'
+  },
+  {
+    _id: ObjectId('68330d5855c924ce206c4bd3'),
+    maker: 'Mahindra',
+    model: 'XUV500',
+    fuel_type: 'Diesel',
+    transmission: 'Manual',
+    engine: { type: 'Turbocharged', cc: 2179, torque: '360 Nm' },
+    features: [ 'All-Wheel Drive', 'Navigation System', 'Cruise Control' ],
+    sunroof: true,
+    airbags: 6,
+    alloys: 'yes',
+    color: 'Blue'
+  }
+]
+car_dealership> db.cars.find().skip(1)
+[
+  {
+    _id: ObjectId('68330d5855c924ce206c4bd3'),
+    maker: 'Mahindra',
+    model: 'XUV500',
+    fuel_type: 'Diesel',
+    transmission: 'Manual',
+    engine: { type: 'Turbocharged', cc: 2179, torque: '360 Nm' },
+    features: [ 'All-Wheel Drive', 'Navigation System', 'Cruise Control' ],
+    sunroof: true,
+    airbags: 6,
+    alloys: 'yes',
+    color: 'Blue'
+  },
+  {
+    _id: ObjectId('683318b12de62c4f8acc9840'),
+    model: 'Venue',
+    Maker: 'Hyundai'
+  },
+  {
+    _id: ObjectId('68331ff555c924ce206c4bd7'),
+    maker: 'Tata',
+    model: 'Nexon',
+    fuel_type: 'Petrol',
+    transmission: 'Automatic',
+    engine: { type: 'Turbocharged', cc: 1199, torque: '170 Nm' },
+    features: [ 'Touchscreen', 'Reverse Camera', 'Bluetooth Connectivity' ],
+    sunroof: false,
+    airbags: 2
+  }
+]
