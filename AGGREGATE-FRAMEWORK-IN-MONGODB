@@ -156,3 +156,17 @@ car_dealership> db.cars.aggregate([
 
 car_dealership> db.cars.aggregate([
 ... {$unwind:"$owners"}])
+
+
+car_dealership> db.cars.aggregate([
+...  {$match:{maker:"Hyundai"}},
+... {$project:{
+... _id:0,
+... car_name:{$concat:["$maker","$model"]}
+...  }}])
+[
+  { car_name: 'HyundaiCreta' },
+  { car_name: 'HyundaiVenue' },
+  { car_name: 'Hyundaii20' },
+  { car_name: 'HyundaiKona Electric' }
+]
