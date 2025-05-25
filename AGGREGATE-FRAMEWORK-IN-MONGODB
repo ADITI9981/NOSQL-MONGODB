@@ -142,3 +142,14 @@ car_dealership> db.cars.aggregate([
   { maker: 'Hyundai', model: 'Venue', fuel_type: 'Petrol' },
   { maker: 'Hyundai', model: 'i20', fuel_type: 'Petrol' }
 ]
+
+car_dealership> db.cars.aggregate([
+... {$sortByCount:"$maker"}
+... ])
+[
+  { _id: 'Hyundai', count: 4 },
+  { _id: 'Honda', count: 3 },
+  { _id: 'Tata', count: 3 },
+  { _id: 'Maruti Suzuki', count: 3 },
+  { _id: 'Mahindra', count: 1 }
+]
