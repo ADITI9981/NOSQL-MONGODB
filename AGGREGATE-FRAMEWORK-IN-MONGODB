@@ -246,3 +246,30 @@ car_dealership> db.hyundai_cars.find()
     CarName: 'Hyundai Kona Electric'
   }
 ]
+car_dealership> show collections
+cars
+hyundai_cars
+test
+car_dealership> db.cars.aggregate([
+... {$project:{
+... _id:0,
+... model:1,
+... new_price:{$add:["$price",55000]}
+... }}
+... ])
+[
+  { model: 'Creta', new_price: 1555000 },
+  { model: 'Baleno', new_price: 855000 },
+  { model: 'XUV500', new_price: 1855000 },
+  { model: 'City', new_price: 1255000 },
+  { model: 'Nexon', new_price: 1155000 },
+  { model: 'Venue', new_price: 1255000 },
+  { model: 'i20', new_price: 955000 },
+  { model: 'Swift', new_price: 805000 },
+  { model: 'Harrier', new_price: 2055000 },
+  { model: 'Amaze', new_price: 1055000 },
+  { model: 'Nexon EV', new_price: 1455000 },
+  { model: 'Kona Electric', new_price: 2355000 },
+  { model: 'WagonR', new_price: 655000 },
+  { model: 'Amaze', new_price: 855000 }
+]
