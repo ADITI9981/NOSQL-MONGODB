@@ -184,3 +184,17 @@ car_dealership> db.cars.aggregate([
   { model: 'I20' },
   { model: 'KONA ELECTRIC' }
 ]
+
+car_dealership> db.cars.aggregate([
+... {$match:{maker:"Hyundai"}},
+...  {$project:{
+... _id:0,
+...  model:{$toUpper:{$concat:["$maker"," ","$model"]}}
+... }}
+... ])
+[
+  { model: 'HYUNDAI CRETA' },
+  { model: 'HYUNDAI VENUE' },
+  { model: 'HYUNDAI I20' },
+  { model: 'HYUNDAI KONA ELECTRIC' }
+]
