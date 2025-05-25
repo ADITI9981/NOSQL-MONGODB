@@ -223,3 +223,26 @@ car_dealership> db.cars.aggregate([
   { model: 'WagonR', is_diesel: false },
   { model: 'Amaze', is_diesel: false }
 ]
+
+car_dealership>  db.cars.aggregate([
+... {$match:{maker:"Hyundai"}},
+...  {$project:{_id:0,
+...       CarName:{$concat:["$maker"," ","$model"]}}},
+... {$out:"hyundai_cars"}])
+
+car_dealership> db.hyundai_cars.find()
+[
+  {
+    _id: ObjectId('683352722de62c4f8acc9841'),
+    CarName: 'Hyundai Creta'
+  },
+  {
+    _id: ObjectId('683352722de62c4f8acc9842'),
+    CarName: 'Hyundai Venue'
+  },
+  { _id: ObjectId('683352722de62c4f8acc9843'), CarName: 'Hyundai i20' },
+  {
+    _id: ObjectId('683352722de62c4f8acc9844'),
+    CarName: 'Hyundai Kona Electric'
+  }
+]
