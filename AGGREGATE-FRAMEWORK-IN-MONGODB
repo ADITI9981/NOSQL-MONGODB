@@ -64,3 +64,40 @@ car_dealership> db.cars.aggregate([
   { _id: 'Electric', TotalCars: 2 },
   { _id: 'Petrol', TotalCars: 6 }
 ]
+car_dealership>  db.cars.aggregate([
+... {$match:{
+... maker:"Hyundai",
+... "engine.cc":{$gt:1200}}}
+... ])
+[
+  {
+    _id: ObjectId('68333a8355c924ce206c4bd8'),
+    maker: 'Hyundai',
+    model: 'Creta',
+    fuel_type: 'Diesel',
+    transmission: 'Manual',
+    engine: { type: 'Naturally Aspirated', cc: 1493, torque: '250 Nm' },
+    features: [
+      'Sunroof',
+      'Leather Seats',
+      'Wireless Charging',
+      'Ventilated Seats',
+      'Bluetooth'
+    ],
+    sunroof: true,
+    airbags: 6,
+    price: 1500000,
+    owners: [
+      { name: 'Raju', purchase_date: '2021-03-15', location: 'Mumbai' },
+      { name: 'Shyam', purchase_date: '2023-01-10', location: 'Delhi' }
+    ],
+    service_history: [
+      { date: '2022-04-10', service_type: 'Oil Change', cost: 5000 },
+      {
+        date: '2023-07-18',
+        service_type: 'Brake Replacement',
+        cost: 12000
+      }
+    ]
+  }
+]
