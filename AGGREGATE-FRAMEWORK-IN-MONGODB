@@ -273,3 +273,28 @@ car_dealership> db.cars.aggregate([
   { model: 'WagonR', new_price: 655000 },
   { model: 'Amaze', new_price: 855000 }
 ]
+
+car_dealership> db.cars.aggregate([
+... {$project:{
+... _id:0,
+...  model:1,
+...  price:1}},
+...  {$addFields:{price_in_lakhs:
+...  {$divide:["$price",100000]}}}
+... ])
+[
+  { model: 'Creta', price: 1500000, price_in_lakhs: 15 },
+  { model: 'Baleno', price: 800000, price_in_lakhs: 8 },
+  { model: 'XUV500', price: 1800000, price_in_lakhs: 18 },
+  { model: 'City', price: 1200000, price_in_lakhs: 12 },
+  { model: 'Nexon', price: 1100000, price_in_lakhs: 11 },
+  { model: 'Venue', price: 1200000, price_in_lakhs: 12 },
+  { model: 'i20', price: 900000, price_in_lakhs: 9 },
+  { model: 'Swift', price: 750000, price_in_lakhs: 7.5 },
+  { model: 'Harrier', price: 2000000, price_in_lakhs: 20 },
+  { model: 'Amaze', price: 1000000, price_in_lakhs: 10 },
+  { model: 'Nexon EV', price: 1400000, price_in_lakhs: 14 },
+  { model: 'Kona Electric', price: 2300000, price_in_lakhs: 23 },
+  { model: 'WagonR', price: 600000, price_in_lakhs: 6 },
+  { model: 'Amaze', price: 800000, price_in_lakhs: 8 }
+]
