@@ -38,3 +38,29 @@ car_dealership>  db.cars.aggregate([{$group:{_id:"$maker"}}])
   { _id: 'Mahindra' },
   { _id: 'Honda' }
 ]
+car_dealership>  db.cars.aggregate([
+... {$group:{
+...      _id:"$maker",
+...      TotalCars:{$sum:1}
+...     }}
+... ])
+[
+  { _id: 'Tata', TotalCars: 3 },
+  { _id: 'Hyundai', TotalCars: 4 },
+  { _id: 'Maruti Suzuki', TotalCars: 3 },
+  { _id: 'Mahindra', TotalCars: 1 },
+  { _id: 'Honda', TotalCars: 3 }
+]
+car_dealership> db.cars.aggregate([
+...     {$group:{
+...            _id:"$fuel_type",
+...            TotalCars:{$sum:1}
+...             }
+...     }
+... ])
+[
+  { _id: 'Diesel', TotalCars: 4 },
+  { _id: 'CNG', TotalCars: 2 },
+  { _id: 'Electric', TotalCars: 2 },
+  { _id: 'Petrol', TotalCars: 6 }
+]
