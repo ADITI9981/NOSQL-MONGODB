@@ -198,3 +198,28 @@ car_dealership> db.cars.aggregate([
   { model: 'HYUNDAI I20' },
   { model: 'HYUNDAI KONA ELECTRIC' }
 ]
+car_dealership> db.cars.aggregate([
+... {$project:{
+... _id:0,
+... model:1,
+... is_diesel:{
+...    $regexMatch:{input:"$fuel_type",regex:"Dies"}
+... }
+... }}
+... ])
+[
+  { model: 'Creta', is_diesel: true },
+  { model: 'Baleno', is_diesel: false },
+  { model: 'XUV500', is_diesel: true },
+  { model: 'City', is_diesel: false },
+  { model: 'Nexon', is_diesel: false },
+  { model: 'Venue', is_diesel: false },
+  { model: 'i20', is_diesel: false },
+  { model: 'Swift', is_diesel: false },
+  { model: 'Harrier', is_diesel: true },
+  { model: 'Amaze', is_diesel: true },
+  { model: 'Nexon EV', is_diesel: false },
+  { model: 'Kona Electric', is_diesel: false },
+  { model: 'WagonR', is_diesel: false },
+  { model: 'Amaze', is_diesel: false }
+]
