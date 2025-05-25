@@ -130,3 +130,15 @@ car_dealership> db.cars.aggregate([
   { maker: 'Hyundai', model: 'i20', fuel_type: 'Petrol' },
   { maker: 'Hyundai', model: 'Kona Electric', fuel_type: 'Electric' }
 ]
+car_dealership> db.cars.aggregate([
+... {$match:{maker:"Hyundai"}},
+...  {$project:
+... {maker:1,model:1,fuel_type:1,_id:0}},
+... {$sort:{model:1}}
+... ])
+[
+  { maker: 'Hyundai', model: 'Creta', fuel_type: 'Diesel' },
+  { maker: 'Hyundai', model: 'Kona Electric', fuel_type: 'Electric' },
+  { maker: 'Hyundai', model: 'Venue', fuel_type: 'Petrol' },
+  { maker: 'Hyundai', model: 'i20', fuel_type: 'Petrol' }
+]
