@@ -153,3 +153,6 @@ car_dealership> db.cars.aggregate([
   { _id: 'Maruti Suzuki', count: 3 },
   { _id: 'Mahindra', count: 1 }
 ]
+
+car_dealership> db.cars.aggregate([
+... {$unwind:"$owners"}])
