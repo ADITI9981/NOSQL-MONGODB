@@ -44,3 +44,45 @@ car_dealership> db.cars.aggregate([
   },
   { maker: 'Honda', model: 'Amaze', fuel_cat: 'Non Petrol Car' }
 ]
+
+
+
+
+car_dealership> db.cars.aggregate([
+... {$project:{
+...  _id:0,maker:1,model:1,
+... priceCategory:{
+... $switch:{
+...   branches:[
+... {case:{$lt:["$price",500000]},
+... then:"Budget"},
+... {case:{$and:[{$gte:["$price",500000]},{$lt:["Pr                                    ice",1000000]}]},
+... then:"MID_RANGE"},
+...  {case:{$gte:["$price",1000000]},
+... then:"Premium"}
+... ],
+... default:"unknown"
+... }
+... }
+... }}
+... ])
+[
+  { maker: 'Hyundai', model: 'Creta', priceCategory: 'Premium' },
+  { maker: 'Maruti Suzuki', model: 'Baleno', priceCategory: 'unknown' },
+  { maker: 'Mahindra', model: 'XUV500', priceCategory: 'Premium' },
+  { maker: 'Honda', model: 'City', priceCategory: 'Premium' },
+  { maker: 'Tata', model: 'Nexon', priceCategory: 'Premium' },
+  { maker: 'Hyundai', model: 'Venue', priceCategory: 'Premium' },
+  { maker: 'Hyundai', model: 'i20', priceCategory: 'unknown' },
+  { maker: 'Maruti Suzuki', model: 'Swift', priceCategory: 'unknown' },
+  { maker: 'Tata', model: 'Harrier', priceCategory: 'Premium' },
+  { maker: 'Honda', model: 'Amaze', priceCategory: 'Premium' },
+  { maker: 'Tata', model: 'Nexon EV', priceCategory: 'Premium' },
+  {
+    maker: 'Hyundai',
+    model: 'Kona Electric',
+    priceCategory: 'Premium'
+  },
+  { maker: 'Maruti Suzuki', model: 'WagonR', priceCategory: 'unknown' },
+  { maker: 'Honda', model: 'Amaze', priceCategory: 'unknown' }
+]
