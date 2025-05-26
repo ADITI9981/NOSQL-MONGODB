@@ -86,3 +86,27 @@ car_dealership> db.cars.aggregate([
   { maker: 'Maruti Suzuki', model: 'WagonR', priceCategory: 'unknown' },
   { maker: 'Honda', model: 'Amaze', priceCategory: 'unknown' }
 ]
+
+car_dealership> db.cars.aggregate([
+... {$project:{
+... _id:0,
+... model:1,
+... date:"$$NOW"
+... }
+... }])
+[
+  { model: 'Creta', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Baleno', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'XUV500', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'City', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Nexon', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Venue', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'i20', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Swift', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Harrier', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Amaze', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Nexon EV', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Kona Electric', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'WagonR', date: ISODate('2025-05-26T07:30:29.362Z') },
+  { model: 'Amaze', date: ISODate('2025-05-26T07:30:29.362Z') }
+]
