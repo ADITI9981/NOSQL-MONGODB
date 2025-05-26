@@ -1,0 +1,30 @@
+store_db> db.createCollection("user1",{
+...  validator:{
+... $jsonSchema:{
+... bsonType:"object",
+...  required:["name","phone"]
+... }
+... }
+... })
+{ ok: 1 }
+store_db> db.user1.insertOne({name:"raju",phone:123})
+{
+  acknowledged: true,
+  insertedId: ObjectId('683428d41cc3a534606c4bd0')
+}
+store_db>  db.user1.insertOne({name:"sham"})
+Uncaught:
+MongoServerError: Document failed validation
+Additional information: {
+  failingDocumentId: ObjectId('683429181cc3a534606c4bd1'),
+  details: {
+    operatorName: '$jsonSchema',
+    schemaRulesNotSatisfied: [
+      {
+        operatorName: 'required',
+        specifiedAs: { required: [ 'name', 'phone' ] },
+        missingProperties: [ 'phone' ]
+      }
+    ]
+  }
+}
