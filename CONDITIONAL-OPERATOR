@@ -1,1 +1,46 @@
-
+car_dealership> db.cars.aggregate([
+...      {$project:{
+...          _id:0,
+...          maker:1,
+...          model:1,
+...          fuel_cat:{
+...              $cond:{
+...                  if:{$eq:["fuel_type","Petrol"]},
+...                         then:"Petrol Car",
+...                  else: "Non Petrol Car"
+...               }
+...           }
+...       }}
+... ])
+[
+  { maker: 'Hyundai', model: 'Creta', fuel_cat: 'Non Petrol Car' },
+  {
+    maker: 'Maruti Suzuki',
+    model: 'Baleno',
+    fuel_cat: 'Non Petrol Car'
+  },
+  { maker: 'Mahindra', model: 'XUV500', fuel_cat: 'Non Petrol Car' },
+  { maker: 'Honda', model: 'City', fuel_cat: 'Non Petrol Car' },
+  { maker: 'Tata', model: 'Nexon', fuel_cat: 'Non Petrol Car' },
+  { maker: 'Hyundai', model: 'Venue', fuel_cat: 'Non Petrol Car' },
+  { maker: 'Hyundai', model: 'i20', fuel_cat: 'Non Petrol Car' },
+  {
+    maker: 'Maruti Suzuki',
+    model: 'Swift',
+    fuel_cat: 'Non Petrol Car'
+  },
+  { maker: 'Tata', model: 'Harrier', fuel_cat: 'Non Petrol Car' },
+  { maker: 'Honda', model: 'Amaze', fuel_cat: 'Non Petrol Car' },
+  { maker: 'Tata', model: 'Nexon EV', fuel_cat: 'Non Petrol Car' },
+  {
+    maker: 'Hyundai',
+    model: 'Kona Electric',
+    fuel_cat: 'Non Petrol Car'
+  },
+  {
+    maker: 'Maruti Suzuki',
+    model: 'WagonR',
+    fuel_cat: 'Non Petrol Car'
+  },
+  { maker: 'Honda', model: 'Amaze', fuel_cat: 'Non Petrol Car' }
+]
